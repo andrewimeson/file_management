@@ -8,8 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Markdownlint action
-        uses: xt0rted/markdownlint-problem-matcher@v1.1.0
-
       - name: Run Markdownlint
-        run: markdownlint -- $(git ls-files *.md)
+        run: npx markdownlint -- $(git ls-files *.md)
