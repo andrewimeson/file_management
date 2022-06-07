@@ -2,6 +2,19 @@
 
 An example API service that retrieves a file.
 
+## Developing
+
+1. Clone the repository
+
+    ```sh
+    git clone git@github.com:andrewimeson/file_management.git
+    cd file_management
+    ```
+
+> **Note**
+> Optional pre-commit hooks are available to take care of autoformatting,
+> With pre-commit installed, run `pre-commit install` to install the git hooks
+
 ## Functional Requirements
 
 - [ ] Expose an HTTP endpoint at the URL `/manage_file` that accepts a JSON

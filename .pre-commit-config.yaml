@@ -1,0 +1,20 @@
+---
+# INTERVIEW NOTE:
+# pre-commit is a good fit for low-friction autoformatting and some *very* basic
+# tests. I don't think every test should go in pre-commit, because you want to
+# allow and encourage committing WIP code (to an appropriate branch).
+#
+# A local build system (e.g. Gradle, make), a Continuous Integration platform
+# (e.g. GitHub Actions, CircleCI), and a local hooks package management system
+# (pre-commit, husky) all overlap in features, but each can all three be used in
+# a project. I won't philosophize beyond that here, but this project
+# demonstrates my general take on where to put different pieces of the puzzle.
+#
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-added-large-files
