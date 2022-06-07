@@ -8,7 +8,24 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install Poetry and pre-commit
+        run: |
+          pipx install poetry
+          pipx install pre-commit
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+          cache: poetry
+
       - name: Run Markdownlint
         run: |
           npm install -g markdownlint-cli
           markdownlint -- $(git ls-files *.md)
+
+      - name: Install dependencies with Poetry
+        run: poetry install
+
+      - name: Run pre-commit on all files
+        run: pre-commit run --all-files
