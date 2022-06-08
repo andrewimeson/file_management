@@ -1,3 +1,6 @@
+import os
+
+import requests
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -8,6 +11,21 @@ class ManageFile(BaseModel):
     action: str
 
 
+def get_sample_file():
+    """
+    Downloads sample text file and stores on the local filesystem
+    """
+    url_prefix = "https://www.learningcontainer.com/wp-content/uploads/2020/04/"
+    file_name = "sample-text-file.txt"
+    url = url_prefix + file_name
+    file_path = "data/" + file_name
+    r = requests.get(url)
+    if r.status_code == 200:
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "wb") as file:
+            file.write(r.content)
+
+
 @app.get("/")
 async def index():
     """Basic hellow world index"""
@@ -15,12 +33,13 @@ async def index():
 
 
 @app.post("/manage_file")
-async def read_action(action: ManageFile):
+async def manage_file(action: ManageFile):
     """
     Returns an example text file, or updates the version that the server has
     """
     if action.action == "read":
         return {"i_should": "Read"}
     elif action.action == "download":
+        get_sample_file()
         return {"i_should": "Download"}
     return {"success": True}
