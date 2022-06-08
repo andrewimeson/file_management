@@ -14,11 +14,13 @@ def test_index():
     assert response.status_code == 405
 
 
-def test_manage_file():
+def test_manage_file_read():
     response = client.post("/manage_file", data='{"action":"read"}')
     assert response.json() == {"i_should": "Read"}
     assert response.status_code == 200
 
+
+def test_manage_file_download():
     response = client.post("/manage_file", data='{"action":"download"}')
     assert response.json() == {"i_should": "Download"}
     assert response.status_code == 200
