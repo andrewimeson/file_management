@@ -1,9 +1,9 @@
 ---
-name: Lint
+name: Lint and Unit Test
 
 on: push  # yamllint disable-line rule:truthy
 jobs:
-  lint:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -29,3 +29,6 @@ jobs:
 
       - name: Run pre-commit on all files
         run: pre-commit run --all-files
+
+      - name: Run unit tests with pytest
+        run: poetry run pytest
