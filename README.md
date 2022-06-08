@@ -24,9 +24,16 @@ An example API service that retrieves a file. Written in Python using
    poetry run uvicorn main:app --reload
    ```
 
+4. Test your changes locally
+
+   ```sh
+   poetry run pytest
+   ```
+
 > **Note**
 > Optional pre-commit hooks are available to take care of autoformatting,
-> With pre-commit installed, run `pre-commit install` to install the git hooks
+> With [pre-commit installed][pre-com_install], run `pre-commit install` to
+> install the git hooks
 
 ## Functional Requirements
 
@@ -42,3 +49,4 @@ An example API service that retrieves a file. Written in Python using
 
 [poetry]: https://python-poetry.org
 [fastapi]: https://fastapi.tiangolo.com
+[pre-com_install]: https://pre-commit.com/#install
