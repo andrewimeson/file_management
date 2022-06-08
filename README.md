@@ -1,6 +1,7 @@
 # [File Management API](https://github.com/andrewimeson/file_management)
 
-An example API service that retrieves a file.
+An example API service that retrieves a file. Written in Python using
+[FastAPI][fastapi].
 
 ## Developing
 
@@ -17,12 +18,10 @@ An example API service that retrieves a file.
    poetry install
    ```
 
-3. Run the app
+3. Run the app with hot reload
 
    ```sh
-   export FLASK_ENV=development
-   export FLASK_APP=file_management/app.py
-   poetry run flask run
+   poetry run uvicorn main:app --reload
    ```
 
 > **Note**
@@ -31,7 +30,7 @@ An example API service that retrieves a file.
 
 ## Functional Requirements
 
-- [ ] Expose an HTTP endpoint at the URL `/manage_file` that accepts a JSON
+- [X] Expose an HTTP endpoint at the URL `/manage_file` that accepts a JSON
       payload.
 - [ ] If the payload includes `"action": "download"`, fetch the file at
       `https://www.learningcontainer.com/wp-content/uploads/2020/04/sample-text-file.txt`
@@ -42,3 +41,4 @@ An example API service that retrieves a file.
       otherwise behaves appropriately for a standard HTTP service.
 
 [poetry]: https://python-poetry.org
+[fastapi]: https://fastapi.tiangolo.com
