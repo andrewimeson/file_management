@@ -8,16 +8,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Poetry and pre-commit
+      # Poetry has to be installed before the setup-python action runs because
+      # the setup-python cache looks for the poetry executable
+      - name: Install Poetry
         run: |
           pipx install poetry
-          pipx install pre-commit
 
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
           python-version: 3.9
           cache: poetry
+
+      - name: Install pre-commit
+        run: |
+          pipx install pre-commit
 
       - name: Run Markdownlint
         run: |
