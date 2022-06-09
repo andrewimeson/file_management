@@ -55,3 +55,11 @@ def test_get_sample_file():
     # but as it is the data is only transitive.
     os.remove(sample_file)
     os.rmdir("data/")
+
+
+def test_manage_file_errors():
+    response = client.post("/manage_file", data='{"action":"make bacon"}')
+    assert response.status_code == 422  # 422 = Unprocessable Entity
+
+    response = client.get("/manage_file")
+    assert response.status_code == 405  # 405 = Method Not Allowed

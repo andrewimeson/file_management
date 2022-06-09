@@ -44,7 +44,7 @@ An example API service that retrieves a file. Written in Python using
       and store it locally.
 - [X] If the payload includes `"action": "read"`, return the contents of the
       file.
-- [ ] Ensure your service returns proper status codes for all requests, and
+- [X] Ensure your service returns proper status codes for all requests, and
       otherwise behaves appropriately for a standard HTTP service.
 
 [poetry]: https://python-poetry.org
