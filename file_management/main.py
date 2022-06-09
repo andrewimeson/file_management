@@ -5,7 +5,20 @@ import requests
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-app = FastAPI()
+description = """
+Manages a lorem ipsum file for your reading
+
+## About
+
+See [the GitHub repo](https://github.com/andrewimeson/file_management) for more
+information.
+"""
+
+app = FastAPI(
+    title="File Management API",
+    description=description,
+    contact={"name": "Andrew Imeson", "url": "https://andrewimeson.com/"},
+)
 
 
 class FileAction(str, Enum):
