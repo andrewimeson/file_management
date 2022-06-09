@@ -38,8 +38,16 @@ def test_manage_file_download():
 
 
 def test_get_sample_file():
-    get_sample_file()
+    # Make sure it's starting from a fresh state
     sample_file = "data/sample-text-file.txt"
+    if os.path.exists(sample_file):
+        os.remove(sample_file)
+    if os.path.exists("data/"):
+        os.rmdir("data/")
+    # Real developers would use a mock network setup for the test so that the
+    # test isn't network-dependant. I would like to learn to do that, but that's
+    # not in my time-limit right now
+    get_sample_file()
     # This really should be a temp file setup, but time
     assert os.path.exists(sample_file)
     # Instead, let's at least clean it up so the test is accurate.
