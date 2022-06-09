@@ -15,6 +15,7 @@ black = "^22.3.0"
 flake8 = "^4.0.1"
 isort = "^5.10.1"
 uvicorn = {extras = ["standard"], version = "^0.17.6"}
+bandit = "^1.7.4"
 
 [tool.isort]
 profile = "black"
