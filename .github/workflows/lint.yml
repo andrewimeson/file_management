@@ -40,3 +40,6 @@ jobs:
 
       - name: Run unit tests with pytest
         run: poetry run pytest
+
+      - name: Run flake8
+        run: poetry run flake8 .

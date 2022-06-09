@@ -1,0 +1,5 @@
+# Why, oh why do you not support pyproject.toml like every other tool, Flake8?
+# Maybe someday: https://github.com/PyCQA/flake8/issues/234
+[flake8]
+# Match the Black standard
+max-line-length = 88
