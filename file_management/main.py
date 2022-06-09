@@ -1,4 +1,5 @@
 import os
+from enum import Enum
 
 import requests
 from fastapi import FastAPI
@@ -7,8 +8,16 @@ from pydantic import BaseModel
 app = FastAPI()
 
 
+class FileAction(str, Enum):
+    download = "download"
+    read = "read"
+
+
 class ManageFile(BaseModel):
-    action: str
+    action: FileAction
+
+    class Config:
+        use_enum_values = True
 
 
 # This is not the best place to store this...
@@ -40,10 +49,10 @@ async def manage_file(action: ManageFile):
     """
     Returns an example text file, or updates the version that the server has
     """
-    if action.action == "read":
+    if action.action == FileAction.read:
         with open(file_path) as file:
             data = {"content": file.read()}
             return data
-    elif action.action == "download":
+    elif action.action == FileAction.download:
         get_sample_file()
         return {"i_should": "Download"}
