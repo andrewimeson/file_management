@@ -11,14 +11,17 @@ class ManageFile(BaseModel):
     action: str
 
 
+# This is not the best place to store this...
+file_name = "sample-text-file.txt"
+file_path = "data/" + file_name
+
+
 def get_sample_file():
     """
     Downloads sample text file and stores on the local filesystem
     """
     url_prefix = "https://www.learningcontainer.com/wp-content/uploads/2020/04/"
-    file_name = "sample-text-file.txt"
     url = url_prefix + file_name
-    file_path = "data/" + file_name
     r = requests.get(url)
     if r.status_code == 200:
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -38,8 +41,9 @@ async def manage_file(action: ManageFile):
     Returns an example text file, or updates the version that the server has
     """
     if action.action == "read":
-        return {"i_should": "Read"}
+        with open(file_path) as file:
+            data = {"content": file.read()}
+            return data
     elif action.action == "download":
         get_sample_file()
         return {"i_should": "Download"}
-    return {"success": True}

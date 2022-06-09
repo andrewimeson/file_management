@@ -6,6 +6,12 @@ from file_management.main import app, get_sample_file
 
 client = TestClient(app)
 
+# This is not the best testing setup. I do too much manual setup and tear down,
+# and I don't make use of temporary directories to isolate state between tests.
+# Ideally some thought would be put into a making a test harness that takes care
+# of this automatically for each test.
+# Hey, at least I know it's bad?
+
 
 def test_index():
     response = client.get("/")
@@ -17,8 +23,11 @@ def test_index():
 
 
 def test_manage_file_read():
+    # First we need to make sure the file is re-downloaded. This is not clean.
+    response = client.post("/manage_file", data='{"action":"download"}')
+    # Then we try and read it
     response = client.post("/manage_file", data='{"action":"read"}')
-    assert response.json() == {"i_should": "Read"}
+    assert b"Lorem" in response.content
     assert response.status_code == 200
 
 
