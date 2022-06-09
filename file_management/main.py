@@ -3,6 +3,7 @@ from enum import Enum
 
 import requests
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
 description = """
@@ -53,8 +54,8 @@ def get_sample_file():
 
 @app.get("/")
 async def index():
-    """Basic hellow world index"""
-    return {"Hello": "World"}
+    """Index page redirect to docs"""
+    return RedirectResponse("/docs/")
 
 
 @app.post("/manage_file")

@@ -14,9 +14,9 @@ client = TestClient(app)
 
 
 def test_index():
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"Hello": "World"}
+    response = client.get("/", allow_redirects=False)
+    assert response.is_redirect
+    assert response.headers["location"] == "/docs/"
 
     response = client.post("/")
     assert response.status_code == 405
