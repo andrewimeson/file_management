@@ -39,3 +39,6 @@ jobs:
         run: |
           tflint --init
           tflint --format compact
+
+      - name: Check for security issues with tfsec
+        uses: aquasecurity/tfsec-action@v1.0.2
