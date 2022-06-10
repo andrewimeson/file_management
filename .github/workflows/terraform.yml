@@ -1,0 +1,41 @@
+---
+name: Terraform Lint and Validate
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    paths:
+      - terraform/**
+      - .github/workflows/terraform.yml
+
+defaults:
+  run:
+    working-directory: ./terraform/
+jobs:
+  terraform-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.2
+
+      - uses: terraform-linters/setup-tflint@v1
+        name: Setup TFLint
+        with:
+          tflint_version: v0.37.0
+
+      - name: Initialize Terraform plugins
+        run: terraform init -backend=false
+
+      - name: Check Terraform format
+        run: terraform fmt -check
+
+      - name: Validate Terraform files
+        run: terraform validate -no-color
+
+      - name: Lint Terraform with tflint
+        run: |
+          tflint --init
+          tflint --format compact

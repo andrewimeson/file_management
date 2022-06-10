@@ -1,5 +1,5 @@
 ---
-name: Lint and Unit Test
+name: Lint and Unit Test App
 
 on: push  # yamllint disable-line rule:truthy
 jobs:
