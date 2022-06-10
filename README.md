@@ -21,7 +21,7 @@ An example API service that retrieves a file. Written in Python using
 3. Run the app with hot reload
 
    ```sh
-   poetry uvicorn file_management.main:app --reload
+   poetry run uvicorn file_management.main:app --reload
    ```
 
 4. Test your changes locally
